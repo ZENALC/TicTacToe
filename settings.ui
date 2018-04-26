@@ -58,6 +58,9 @@
            <property name="text">
             <string>X</string>
            </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
           </widget>
          </item>
          <item>
@@ -76,12 +79,39 @@
        <property name="text">
         <string>Go first?</string>
        </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="loggingCheck">
+       <property name="text">
+        <string>Logging</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="deleteSaveBtn">
        <property name="text">
         <string>Delete Save</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="clearLog">
+       <property name="text">
+        <string>Clear Log</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="openLog">
+       <property name="text">
+        <string>Open Log</string>
        </property>
       </widget>
      </item>
