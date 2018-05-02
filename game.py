@@ -1,6 +1,5 @@
 import random, sys, os, logging
 from pickle import load, dump
-# from PyQt5.QtCore import pyqtSlot, Qt
 from PyQt5 import QtGui, uic, QtMultimedia
 from PyQt5.QtWidgets import QMainWindow, QApplication, QDialog, QMessageBox
 
