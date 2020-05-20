@@ -1,18 +1,23 @@
-import random, sys, os, logging
+__author__ = 'Mihir Shrestha'
+
+import logging
+import os
+import random
+import sys
 from pickle import load, dump
-from PyQt5 import QtGui, uic, QtMultimedia
+
+from PyQt5 import uic, QtMultimedia
 from PyQt5.QtWidgets import QMainWindow, QApplication, QDialog, QMessageBox
 
-__author__ = 'Mihir Shrestha'
 
 class TicTacToe(QMainWindow):
     """A game of craps."""
 
-    def __init__(self, parent = None):
+    def __init__(self, parent=None):
         """Build a game with two dice."""
 
         super().__init__()
-        uic.loadUi("tictactoe.ui", self)
+        uic.loadUi(os.path.join("UI Files", "tictactoe.ui"), self)
 
         self.buttons = [self.button1, self.button2, self.button3, self.button4, self.button5, self.button6,
                         self.button7, self.button8, self.button9]
@@ -49,10 +54,10 @@ class TicTacToe(QMainWindow):
         self.corners = [self.button1, self.button3, self.button7, self.button9]
         self.edges = [self.button8, self.button4, self.button6, self.button2]
         self.notes = {
-            "win": QtMultimedia.QSound("win.wav"),
-            "lose": QtMultimedia.QSound("lose.wav"),
-            "circle": QtMultimedia.QSound("circle.wav"),
-            "cross": QtMultimedia.QSound("cross.wav")
+            "win": QtMultimedia.QSound(os.path.join("Sounds", "win.wav")),
+            "lose": QtMultimedia.QSound(os.path.join("Sounds", "lose.wav")),
+            "circle": QtMultimedia.QSound(os.path.join("Sounds", "circle.wav")),
+            "cross": QtMultimedia.QSound(os.path.join("Sounds", "cross.wav"))
         }
 
         self.actionSettings.triggered.connect(self.showSettings)
@@ -85,7 +90,8 @@ class TicTacToe(QMainWindow):
         if self.logging:
             logging.info("Saving button status")
 
-        self.pickleinfo = [self.user, self.computer, self.wins, self.losses, self.draws, self.goFirst, self.result, self.btnStatus, self.logging]
+        self.pickleinfo = [self.user, self.computer, self.wins, self.losses, self.draws, self.goFirst, self.result,
+                           self.btnStatus, self.logging]
 
         if reply == QMessageBox.Yes:
             if self.logging:
@@ -324,14 +330,15 @@ class TicTacToe(QMainWindow):
     #             return False
     #     return True
 
+
 class Settings(QDialog):
-    def __init__(self, parent = None):
+    def __init__(self, parent=None):
         """Build a game with two dice."""
         if game.logging:
             logging.info("Initialized settings UI")
 
         super().__init__()
-        uic.loadUi("settings.ui", self)
+        uic.loadUi(os.path.join("UI Files", "settings.ui"), self)
         self.goFirstCheck.setChecked(True)
         if game.user == "X":
             self.xRadio.setChecked(True)
@@ -389,7 +396,6 @@ class Settings(QDialog):
         else:
             self.loggingCheck.setChecked(False)
 
-
     def saveSettings(self):
         if self.oRadio.isChecked():
             game.changePlayer('O')
@@ -429,19 +435,21 @@ class Settings(QDialog):
                 logging.info("Save not found")
         game.updateUI()
 
+
 class LogText(QDialog):
-    def __init__(self, parent = None):
+    def __init__(self, parent=None):
         if game.logging:
             logging.info("Initialized Logging Text File")
 
         super().__init__()
-        uic.loadUi("logFileText.ui", self)
+        uic.loadUi(os.path.join("UI Files", "logFileText.ui"), self)
 
 
-if __name__== "__main__":
+if __name__ == "__main__":
     app = QApplication(sys.argv)
-    logger = logging.basicConfig(filename='tictactoe.log', level=logging.INFO,
-                        format='%(asctime)s %(levelname)s Ln %(lineno)d: %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+    logging.basicConfig(filename='tictactoe.log', level=logging.INFO,
+                        format='%(asctime)s %(levelname)s Ln %(lineno)d: %(message)s',
+                        datefmt='%m/%d/%Y %I:%M:%S %p')
     game = TicTacToe()
     settings = Settings()
     game.show()
