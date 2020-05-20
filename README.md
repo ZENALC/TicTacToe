@@ -1,2 +1,2 @@
 # TicTacToe
-Tic Tac Toe game made with PYQT5. 
+Tic Tac Toe game made using PYQT5.  
